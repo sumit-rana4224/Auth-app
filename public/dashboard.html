@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title><link rel="stylesheet" href="style.css"></head>
+<body>
+  <div class="dashboard">
+    <h2>Dashboard</h2>
+    <p id="info">Loading user info...</p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    fetch('/user')
+      .then(res => res.json())
+      .then(user => {
+        document.getElementById('info').innerHTML =
+          `<b>Name:</b> ${user.name}<br><b>Email:</b> ${user.email}`;
+      })
+      .catch(err => {
+        document.getElementById('info').innerText = 'Please login first!';
+      });
+
+    function logout() {
+      window.location.href = '/logout';
+    }
+  </script>
+</body>
+</html>
